@@ -1945,7 +1945,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
     final MediaQueryData media = MediaQuery.of(context);
     final TimeOfDayFormat timeOfDayFormat = localizations.timeOfDayFormat(
         alwaysUse24HourFormat: media.alwaysUse24HourFormat);
-    final bool use24HourDials = hourFormat(of: timeOfDayFormat) != HourFormat.h;
+    final bool use24HourDials = true;
     final ThemeData theme = Theme.of(context);
     final ShapeBorder shape =
         TimePickerTheme.of(context).shape ?? _kDefaultShape;
@@ -1978,7 +1978,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
               children: <Widget>[
                 TextButton(
                   onPressed: _handleCancel,
-                  child: Text(widget.cancelText),
+                  child: Text(widget.cancelText,style: TextStyle(fontFamily: 'ChiscoText',fontSize: 14),),
                 ),
                 TextButton(
                   onPressed: _handleOk,
@@ -2194,6 +2194,7 @@ Future<TimeOfDay?> showPersianTimePicker({
   String cancelText = 'لغو',
   String confirmText = 'تایید',
   String helpText = 'انتخاب زمان',
+  required TextStyle style,
   RouteSettings? routeSettings,
 }) async {
   assert(debugCheckHasMaterialLocalizations(context));
