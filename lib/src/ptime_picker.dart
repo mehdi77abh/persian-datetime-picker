@@ -133,7 +133,7 @@ class _TimePickerHeader extends StatelessWidget {
                   Expanded(
                     child: Row(
                       // Hour/minutes should not change positions in RTL locales.
-                      textDirection: TextDirection.ltr,
+                      textDirection: TextDirection.rtl,
                       children: <Widget>[
                         Expanded(
                             child:
@@ -179,7 +179,7 @@ class _TimePickerHeader extends StatelessWidget {
                 height: kMinInteractiveDimension * 2,
                 child: Row(
                   // Hour/minutes should not change positions in RTL locales.
-                  textDirection: TextDirection.ltr,
+                  textDirection: TextDirection.rtl,
                   children: <Widget>[
                     Expanded(
                         child: _HourControl(fragmentContext: fragmentContext)),
@@ -1160,7 +1160,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
       value: value,
       painter: TextPainter(
         text: TextSpan(style: style, text: label),
-        textDirection: TextDirection.ltr,
+        textDirection: TextDirection.rtl,
         textScaleFactor: labelScaleFactor,
       )..layout(),
       onTap: onTap,
@@ -1447,7 +1447,7 @@ class _TimePickerInputState extends State<_TimePickerInput> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // Hour/minutes should not change positions in RTL locales.
-                  textDirection: TextDirection.ltr,
+                  textDirection: TextDirection.rtl,
                   children: <Widget>[
                     Expanded(
                       child: Column(
