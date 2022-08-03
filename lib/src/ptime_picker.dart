@@ -1733,7 +1733,7 @@ class _TimePickerDialog extends StatefulWidget {
     required this.cancelText,
     required this.confirmText,
     required this.helpText,
-    this.initialEntryMode = PTimePickerEntryMode.dial,
+    this.initialEntryMode = PTimePickerEntryMode.dial, required this.style,
   }) : super(key: key);
 
   /// The time initially selected when the dialog is shown.
@@ -1754,6 +1754,8 @@ class _TimePickerDialog extends StatefulWidget {
 
   /// Optionally provide your own help text to the header of the time picker.
   final String helpText;
+
+  final TextStyle style;
 
   @override
   _TimePickerDialogState createState() => _TimePickerDialogState();
@@ -1980,11 +1982,11 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
               children: <Widget>[
                 TextButton(
                   onPressed: _handleCancel,
-                  child: Text(widget.cancelText,style: TextStyle(fontFamily: 'ChiscoText',fontSize: 16),),
+                  child: Text(widget.cancelText,style: widget.style,),
                 ),
                 TextButton(
                   onPressed: _handleOk,
-                  child: Text(widget.confirmText,style: style,),
+                  child: Text(widget.confirmText,style: widget.style),
                 ),
               ],
             ),
@@ -2206,7 +2208,7 @@ Future<TimeOfDay?> showPersianTimePicker({
     initialEntryMode: initialEntryMode,
     cancelText: cancelText,
     confirmText: confirmText,
-    helpText: helpText,
+    helpText: helpText, style: style,
   );
   return await showDialog<TimeOfDay>(
     context: context,
