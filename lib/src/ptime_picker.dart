@@ -1762,6 +1762,8 @@ class _TimePickerDialog extends StatefulWidget {
 class _TimePickerDialogState extends State<_TimePickerDialog> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+
+
   @override
   void initState() {
     super.initState();
@@ -1978,11 +1980,11 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
               children: <Widget>[
                 TextButton(
                   onPressed: _handleCancel,
-                  child: Text(widget.cancelText,style: TextStyle(fontFamily: 'ChiscoText',fontSize: 14),),
+                  child: Text(widget.cancelText,style: TextStyle(fontFamily: 'ChiscoText',fontSize: 16),),
                 ),
                 TextButton(
                   onPressed: _handleOk,
-                  child: Text(widget.confirmText),
+                  child: Text(widget.confirmText,style: style,),
                 ),
               ],
             ),
