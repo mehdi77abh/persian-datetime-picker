@@ -1955,7 +1955,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
         TimePickerTheme.of(context).shape ?? _kDefaultShape;
     final Orientation orientation = media.orientation;
 
-    final Widget actions = Row(
+    final Widget actions =Directionality(textDirection: TextDirection.rtl, child:  Row(
       children: <Widget>[
         const SizedBox(width: 10.0),
         IconButton(
@@ -1993,7 +1993,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
           ),
         ),
       ],
-    );
+    ));
 
     Widget? picker;
     switch (_entryMode) {
