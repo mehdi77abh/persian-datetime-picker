@@ -2015,7 +2015,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
         textDirection: TextDirection.rtl, child: Row(
       children: <Widget>[
         const SizedBox(width: 10.0),
-        IconButton(
+        /*IconButton(
           color: TimePickerTheme
               .of(context)
               .entryModeIconColor ??
@@ -2033,7 +2033,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
               : MaterialLocalizations
               .of(context)
               .dialModeButtonLabel,
-        ),
+        ),*/
         Expanded(
           child: Container(
             alignment: AlignmentDirectional.centerEnd,
