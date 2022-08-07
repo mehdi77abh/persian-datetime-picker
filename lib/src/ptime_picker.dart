@@ -29,7 +29,7 @@ const double _kTimePickerHeightPortraitCollapsed = 484.0;
 const double _kTimePickerHeightLandscapeCollapsed = 304.0;
 
 const BorderRadius _kDefaultBorderRadius =
-BorderRadius.all(Radius.circular(4.0));
+BorderRadius.all(Radius.circular(16.0));
 const ShapeBorder _kDefaultShape =
 RoundedRectangleBorder(borderRadius: _kDefaultBorderRadius);
 

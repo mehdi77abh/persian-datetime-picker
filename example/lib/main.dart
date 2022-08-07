@@ -83,7 +83,11 @@ class _MyHomePageState extends State<MyHomePage> {
                           );
                           if (picked != null && picked != selectedDate) {
                             setState(() {
-                              label = picked.toJalaliDateTime();
+                              label = picked.formatShortDate();
+                              print(picked.formatCompactDate());
+                              print(picked.formatFullDate());
+
+
                             });
                           }
                         },
