@@ -337,7 +337,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
     late Widget picker;
     IconData? entryModeIcon;
     String? entryModeTooltip;
-    switch (_entryMode) {
+   /* switch (_entryMode) {
       case PDatePickerEntryMode.calendar:
         picker = PCalendarDatePicker(
           key: _calendarPickerKey,
@@ -379,7 +379,16 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
         break;
       default:
         break;
-    }
+    }*/
+    picker = PCalendarDatePicker(
+      key: _calendarPickerKey,
+      initialDate: _selectedDate!,
+      firstDate: widget.firstDate,
+      lastDate: widget.lastDate,
+      onDateChanged: _handleDateChanged,
+      selectableDayPredicate: widget.selectableDayPredicate,
+      initialCalendarMode: widget.initialCalendarMode,
+    );
 
     final Widget header = PDatePickerHeader(
       // TODO(darrenaustin): localize 'SELECT DATE'
@@ -403,7 +412,7 @@ class _DatePickerDialogState extends State<_DatePickerDialog> {
       // only if there isn't one provided in the theme.
       shape: dialogTheme.shape ??
           const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(4.0))),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
       clipBehavior: Clip.antiAlias,
       child: Directionality(
         textDirection: TextDirection.rtl,

@@ -98,7 +98,7 @@ class PDatePickerHeader extends StatelessWidget {
 
     final Text help = Text(
       helpText,
-      style: helpStyle,
+      style: helpStyle?.copyWith(fontSize: 12),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
@@ -109,12 +109,12 @@ class PDatePickerHeader extends StatelessWidget {
       maxLines: (isShort || orientation == Orientation.portrait) ? 1 : 2,
       overflow: TextOverflow.visible,
     );
-    final IconButton icon = IconButton(
+    /*final IconButton icon = IconButton(
       icon: Icon(this.icon),
       color: onPrimarySurfaceColor,
       tooltip: iconTooltip,
       onPressed: onIconPressed,
-    );
+    );*/
 
     switch (orientation) {
       case Orientation.portrait:
@@ -137,7 +137,7 @@ class PDatePickerHeader extends StatelessWidget {
                   Row(
                     children: <Widget>[
                       Expanded(child: title),
-                      icon,
+                      //icon,
                     ],
                   ),
                 ],
@@ -170,12 +170,12 @@ class PDatePickerHeader extends StatelessWidget {
                     child: title,
                   ),
                   const Spacer(),
-                  Padding(
+                 /* Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 4,
                     ),
                     child: icon,
-                  ),
+                  ),*/
                 ],
               ),
             ),
