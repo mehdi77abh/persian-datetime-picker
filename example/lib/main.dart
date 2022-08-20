@@ -97,6 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         onTap: () async {
                           Jalali pickedDate = await showModalBottomSheet<Jalali>(
                             context: context,
+
                             builder: (context) {
                               Jalali tempPickedDate;
                               return Container(
@@ -344,7 +345,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Center(
             child: Text(
               label,
-              style: Theme.of(context).textTheme.headline5.copyWith(color: Colors.black),
+              style: Theme.of(context).textTheme.headline5.copyWith(color: Colors.red),
               textAlign: TextAlign.center,
             ),
           ),

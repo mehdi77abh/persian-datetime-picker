@@ -95,9 +95,7 @@ class _TimePickerHeader extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     final TimeOfDayFormat timeOfDayFormat =
     MaterialLocalizations.of(context).timeOfDayFormat(
-      alwaysUse24HourFormat: MediaQuery
-          .of(context)
-          .alwaysUse24HourFormat,
+      alwaysUse24HourFormat: true,
     );
 
     final _TimePickerFragmentContext fragmentContext =
@@ -303,10 +301,7 @@ class _HourControl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
-    final bool alwaysUse24HourFormat =
-        MediaQuery
-            .of(context)
-            .alwaysUse24HourFormat;
+    const bool alwaysUse24HourFormat =true;
     final MaterialLocalizations localizations =
     MaterialLocalizations.of(context);
     final String formattedHour = localizations.formatHour(
@@ -928,7 +923,7 @@ class _Dial extends StatefulWidget {
   const _Dial({
     required this.selectedTime,
     required this.mode,
-    required this.use24HourDials,
+     this.use24HourDials = true,
     required this.onChanged,
     required this.onHourSelected,
   });
@@ -1012,9 +1007,8 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
   }
 
   double _getThetaForTime(TimeOfDay time) {
-    final int hoursFactor = widget.use24HourDials
-        ? TimeOfDay.hoursPerDay
-        : TimeOfDay.hoursPerPeriod;
+    const int hoursFactor = TimeOfDay.hoursPerDay;
+
     final double fraction = widget.mode == _TimePickerMode.hour
         ? (time.hour / hoursFactor) % hoursFactor
         : (time.minute / TimeOfDay.minutesPerHour) % TimeOfDay.minutesPerHour;
@@ -1126,9 +1120,9 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
   void _selectHour(int hour) {
     _announceToAccessibility(context, localizations.formatDecimal(hour));
     TimeOfDay time;
-    if (widget.mode == _TimePickerMode.hour && widget.use24HourDials) {
+    //if (widget.mode == _TimePickerMode.hour && widget.use24HourDials) {
       time = TimeOfDay(hour: hour, minute: widget.selectedTime.minute);
-    } else {
+    /*} else {
       if (widget.selectedTime.period == DayPeriod.am) {
         time = TimeOfDay(hour: hour, minute: widget.selectedTime.minute);
       } else {
@@ -1136,7 +1130,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
             hour: hour + TimeOfDay.hoursPerPeriod,
             minute: widget.selectedTime.minute);
       }
-    }
+    }*/
     final double angle = _getThetaForTime(time);
     _thetaTween!
       ..begin = angle
@@ -1213,8 +1207,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
             textTheme,
             color,
             timeOfDay.hour,
-            localizations.formatHour(timeOfDay,
-                alwaysUse24HourFormat: media.alwaysUse24HourFormat),
+            localizations.formatHour(timeOfDay, alwaysUse24HourFormat: true),
                 () {
               _selectHour(timeOfDay.hour);
             },
@@ -1229,7 +1222,7 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
             color,
             timeOfDay.hour,
             localizations.formatHour(timeOfDay,
-                alwaysUse24HourFormat: media.alwaysUse24HourFormat),
+                alwaysUse24HourFormat: true),
                 () {
               _selectHour(timeOfDay.hour);
             },
@@ -1287,11 +1280,12 @@ class _DialState extends State<_Dial> with SingleTickerProviderStateMixin {
     switch (widget.mode) {
       case _TimePickerMode.hour:
         if (widget.use24HourDials) {
+          print("24 called");
           selectedDialValue = widget.selectedTime.hour;
           primaryLabels = _build24HourRing(theme.textTheme, primaryLabelColor);
-          secondaryLabels =
-              _build24HourRing(theme.textTheme, secondaryLabelColor);
+          secondaryLabels = _build24HourRing(theme.textTheme, secondaryLabelColor);
         } else {
+          print("12 called");
           selectedDialValue = widget.selectedTime.hourOfPeriod;
           primaryLabels = _build12HourRing(theme.textTheme, primaryLabelColor);
           secondaryLabels =
@@ -1365,22 +1359,10 @@ class _TimePickerInputState extends State<_TimePickerInput> {
       return null;
     }
 
-    if (MediaQuery
-        .of(context)
-        .alwaysUse24HourFormat) {
       if (newHour >= 0 && newHour < 24) {
         return newHour;
       }
-    } else {
-      if (newHour > 0 && newHour < 13) {
-        if ((_selectedTime!.period == DayPeriod.pm && newHour != 12) ||
-            (_selectedTime!.period == DayPeriod.am && newHour == 12)) {
-          newHour =
-              (newHour + TimeOfDay.hoursPerPeriod) % TimeOfDay.hoursPerDay;
-        }
-        return newHour;
-      }
-    }
+
     return null;
   }
 
@@ -1453,8 +1435,10 @@ class _TimePickerInputState extends State<_TimePickerInput> {
     assert(debugCheckHasMediaQuery(context));
     final MediaQueryData media = MediaQuery.of(context);
     final TimeOfDayFormat timeOfDayFormat = MaterialLocalizations.of(context)
-        .timeOfDayFormat(alwaysUse24HourFormat: media.alwaysUse24HourFormat);
+        .timeOfDayFormat(alwaysUse24HourFormat: true);
     final bool use24HourDials = hourFormat(of: timeOfDayFormat) != HourFormat.h;
+    print("use24HourDials");
+    print(use24HourDials);
     final ThemeData theme = Theme.of(context);
     final TextStyle? hourMinuteStyle =
         TimePickerTheme
@@ -1684,7 +1668,7 @@ class _HourMinuteTextFieldState extends State<_HourMinuteTextField> {
         ? localizations.formatMinute(widget.selectedTime!)
         : localizations.formatHour(
       widget.selectedTime!,
-      alwaysUse24HourFormat: alwaysUse24HourFormat,
+      alwaysUse24HourFormat: true,
     );
   }
 
@@ -1916,7 +1900,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
     _announceToAccessibility(
       context,
       localizations.formatTimeOfDay(widget.initialTime,
-          alwaysUse24HourFormat: media.alwaysUse24HourFormat),
+          alwaysUse24HourFormat: true),
     );
     _announcedInitialTime = true;
   }
@@ -2002,7 +1986,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
     assert(debugCheckHasMediaQuery(context));
     final MediaQueryData media = MediaQuery.of(context);
     final TimeOfDayFormat timeOfDayFormat = localizations.timeOfDayFormat(
-        alwaysUse24HourFormat: media.alwaysUse24HourFormat);
+        alwaysUse24HourFormat: true);
     final bool use24HourDials = true;
     final ThemeData theme = Theme.of(context);
     final ShapeBorder shape =
@@ -2072,7 +2056,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
               aspectRatio: 1.0,
               child: _Dial(
                 mode: _mode,
-                use24HourDials: use24HourDials,
+                use24HourDials: true,
                 selectedTime: _selectedTime!,
                 onChanged: _handleTimeChanged,
                 onHourSelected: _handleHourSelected,
