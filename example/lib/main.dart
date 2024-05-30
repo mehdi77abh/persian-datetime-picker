@@ -358,7 +358,7 @@ class _MyHomePageState extends State<MyHomePage> {
               label,
               style: Theme.of(context)
                   .textTheme
-                  .headline5
+                  .headlineSmall
                   .copyWith(color: Colors.red),
               textAlign: TextAlign.center,
             ),
